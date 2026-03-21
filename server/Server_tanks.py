@@ -1,8 +1,5 @@
-from socket import *
-import threading
-import json
+from Classes import *
 
-# from Classes import *
 
 HOST = 'localhost'
 IP = 8081
@@ -32,17 +29,18 @@ def sendingData(information_received, player_socket):
 
 
 def playerUpdate(player_socket):
+    tank = Tank(body_image       = body_image,
+                turret_image     = turret_image,
+                gun_image        = gun_image,
+                projectile_image = projectile_image)
     while True:
         try:
-
-                sendingData(
-                    receivingData(),
-                    player_socket
-                )
-
+            pass
 
         except Exception as ex:
             print(ex)
+
+        tank.tankUpdate(receivingData())
 
 
 
