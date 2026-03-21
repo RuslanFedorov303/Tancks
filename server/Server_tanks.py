@@ -1,0 +1,52 @@
+from socket import *
+import threading
+import json
+
+# from Classes import *
+
+HOST = 'localhost'
+IP = 8081
+
+
+server_socket = socket(AF_INET, SOCK_STREAM)
+server_socket.bind((HOST, IP))
+server_socket.listen(5)
+
+players = []
+
+
+def receivingData():
+    information_received = player_socket.recv(1024).decode().strip()
+    information_received = json.loads(information_received)
+    return information_received
+
+
+def sendingData(information_received, player_socket):
+    information_for_sending = json.dumps(information_received)
+    for player in players:
+        player.send(information_for_sending.encode())
+
+
+# def userConnect():
+#     pass
+
+
+def playerUpdate(player_socket):
+    while True:
+        try:
+
+                sendingData(
+                    receivingData(),
+                    player_socket
+                )
+
+
+        except Exception as ex:
+            print(ex)
+
+
+
+while True:
+    player_socket, addr = server_socket.accept()
+    players.append(player_socket)
+    threading.Thread(target=playerUpdate, args=(player_socket,), daemon=True).start()
