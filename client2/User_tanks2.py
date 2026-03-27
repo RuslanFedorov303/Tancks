@@ -16,16 +16,21 @@ while True:
         try:
             mouse_x, mouse_y = pygame.mouse.get_pos()
 
+            event_data = {
+                "type": event.type,
+                "dict": event.__dict__  # або event.__dict__
+            }
+
             socket_player.send(
                 json.dumps(
-                    (event, mouse_x, mouse_y)
+                    (event_data, mouse_x, mouse_y)
                 ).encode()
             )
 
             information_received = socket_player.recv(1024).decode().strip()
             information_received = json.loads(information_received)
-            if information_received:
-                drawTank(information_received)
+            drawTank(information_received)
+            print(1)
 
 
         except Exception as ex:

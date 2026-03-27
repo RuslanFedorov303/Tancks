@@ -1,5 +1,5 @@
 import pygame
-import socket
+from socket import *
 import json
 
 
@@ -7,7 +7,7 @@ HOST = 'localhost'
 IP = 8081
 
 
-screen = pygame.display.set_mode((1300, 700)) # Создаем екран и время
+screen = pygame.display.set_mode((1300, 1000)) # Создаем екран и время
 clock = pygame.time.Clock()
 
 
@@ -24,11 +24,11 @@ gun_image = pygame.transform.scale(
         (600, 300))
 
 projectile_image = pygame.transform.scale(
-        pygame.image.load("client2/Image/Projectile.png").convert_alpha(),
+        pygame.image.load("Image/Projectile.png").convert_alpha(),
         (600, 300))
 
 bush_image = pygame.transform.scale(
-        pygame.image.load("client2/Image/Bush.png").convert_alpha(),
+        pygame.image.load("Image/Bush.png").convert_alpha(),
         (600, 300))
 
 
@@ -45,3 +45,4 @@ def drawTank(dataPlayer):
     rotated_turret = pygame.transform.rotate(turret_image, dataPlayer['turret_rotate'])
     turret_rect = rotated_turret.get_rect(center=(dataPlayer['x_coord'], dataPlayer['y_coord']))
     screen.blit(rotated_turret, turret_rect)
+    print(True)

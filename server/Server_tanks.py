@@ -15,6 +15,7 @@ players = []
 def receivingData():
     information_received = player_socket.recv(1024).decode().strip()
     information_received = json.loads(information_received)
+    information_received[0] = pygame.event.Event(information_received["type"], information_received)
     return information_received
 
 
@@ -35,12 +36,13 @@ def playerUpdate(player_socket):
                 projectile_image = projectile_image)
     while True:
         try:
-            pass
+            tank.tankUpdate(receivingData())
+            sendingData(tank.get_data())
+
 
         except Exception as ex:
             print(ex)
 
-        tank.tankUpdate(receivingData())
 
 
 

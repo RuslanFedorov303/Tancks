@@ -18,11 +18,11 @@ IP = 8081
 
 
 pygame.init() # Инициализируем pygame
-# pygame.mixer.init() # Инициализируем mixer
-#
-#
-# screen = pygame.display.set_mode((1300, 700)) # Создаем екран и время
-# clock = pygame.time.Clock()
+pygame.mixer.init() # Инициализируем mixer
+
+
+screen = pygame.display.set_mode((100, 100)) # Создаем екран и время
+clock = pygame.time.Clock()
 
 
 
@@ -40,11 +40,11 @@ gun_image = pygame.transform.scale(
         (600, 300))
 
 projectile_image = pygame.transform.scale(
-        pygame.image.load("client2/Image/Projectile.png").convert_alpha(),
+        pygame.image.load("Image/Projectile.png").convert_alpha(),
         (600, 300))
 
 bush_image = pygame.transform.scale(
-        pygame.image.load("client2/Image/Bush.png").convert_alpha(),
+        pygame.image.load("Image/Bush.png").convert_alpha(),
         (600, 300))
 
 projectiles = [] # Список снарядов
@@ -235,7 +235,7 @@ class Tank:
 
         if (event.type == pygame.MOUSEBUTTONDOWN
         and self.recharging_long_exit - self.recharging_long_start >= self.recharge):
-            self.gun_offset_animate += 50.0
+            # self.gun_offset_animate += 50.0
 
 
             projectiles.append(Projectile(x_coord       = self.x_coord,
@@ -274,7 +274,7 @@ class Tank:
 
 
 
-    def tankUpdate(self, event, mouse_x, mouse_y, screen = None):
+    def tankUpdate(self, event, mouse_x=0, mouse_y=0, screen = None):
         self._bodyMove()
         self._bodyRotate()
         self._colideWalls()
